@@ -109,6 +109,43 @@ test("syncTimer transitions completed focus sessions into short break", () => {
 });
 
 
+test("syncTimer transitions to long break when focus count reaches interval", () => {
+    const clock = createManualClock(0);
+    const state = createInitialState({
+        longBreakInterval: 2,
+        completedFocusCount: 1,
+    });
+    const started = startTimer(state, clock.now());
+
+    clock.advanceBy(25 * 60 * 1000);
+    const nextState = syncTimer(started, clock.now());
+
+    assert.equal(nextState.mode, MODES.longBreak);
+    assert.equal(nextState.isRunning, false);
+    assert.equal(nextState.remainingSeconds, 15 * 60);
+    assert.equal(nextState.completedFocusCount, 2);
+});
+
+
+test("syncTimer transitions completed breaks back to focus without incrementing focus count", () => {
+    const clock = createManualClock(0);
+    const state = createInitialState({
+        mode: MODES.shortBreak,
+        completedFocusCount: 3,
+        remainingSeconds: 5 * 60,
+    });
+    const started = startTimer(state, clock.now());
+
+    clock.advanceBy(5 * 60 * 1000);
+    const nextState = syncTimer(started, clock.now());
+
+    assert.equal(nextState.mode, MODES.focus);
+    assert.equal(nextState.completedFocusCount, 3);
+    assert.equal(nextState.remainingSeconds, 25 * 60);
+    assert.equal(nextState.lastCompletedMode, MODES.shortBreak);
+});
+
+
 test("syncTimer updates remaining seconds while a session is still in progress", () => {
     const clock = createManualClock(0);
     const state = startTimer(createInitialState(), clock.now());

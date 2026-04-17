@@ -21,6 +21,7 @@ export function createInitialState(overrides = {}) {
     return {
         mode,
         durations,
+        longBreakInterval: overrides.longBreakInterval ?? 4,
         remainingSeconds: overrides.remainingSeconds ?? durations[mode],
         isRunning: overrides.isRunning ?? false,
         endAt: overrides.endAt ?? null,

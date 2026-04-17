@@ -77,9 +77,10 @@ export function switchMode(state, mode) {
 }
 
 
-function getNextModeAfterCompletion(state) {
+function getNextModeAfterCompletion(state, completedFocusCount) {
     if (state.mode === MODES.focus) {
-        return MODES.shortBreak;
+        const isLongBreakTurn = completedFocusCount % state.longBreakInterval === 0;
+        return isLongBreakTurn ? MODES.longBreak : MODES.shortBreak;
     }
 
     return MODES.focus;
@@ -100,10 +101,10 @@ export function syncTimer(state, now) {
         };
     }
 
-    const nextMode = getNextModeAfterCompletion(state);
     const completedFocusCount = state.mode === MODES.focus
         ? state.completedFocusCount + 1
         : state.completedFocusCount;
+    const nextMode = getNextModeAfterCompletion(state, completedFocusCount);
 
     return {
         ...state,

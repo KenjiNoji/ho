@@ -11,7 +11,7 @@
         <section class="app-frame" aria-labelledby="app-title">
             <header class="app-header" data-testid="app-header">
                 <div>
-                    <p class="eyebrow">Stage 2 Static UI</p>
+                    <p class="eyebrow">Stage 4 Interactive Controls</p>
                     <h1 id="app-title">Pomodoro Timer</h1>
                 </div>
                 <p class="description">
@@ -23,32 +23,32 @@
             <section class="app-layout" data-testid="app-layout">
                 <section class="timer-panel" data-testid="timer-panel" aria-label="タイマーパネル">
                     <div class="mode-switcher" data-testid="mode-switcher" role="tablist" aria-label="タイマーモード">
-                        <button class="mode-chip is-active" type="button" role="tab" aria-selected="true">Focus</button>
-                        <button class="mode-chip" type="button" role="tab" aria-selected="false">Short Break</button>
-                        <button class="mode-chip" type="button" role="tab" aria-selected="false">Long Break</button>
+                        <button class="mode-chip is-active" type="button" role="tab" aria-selected="true" data-mode="focus">Focus</button>
+                        <button class="mode-chip" type="button" role="tab" aria-selected="false" data-mode="shortBreak">Short Break</button>
+                        <button class="mode-chip" type="button" role="tab" aria-selected="false" data-mode="longBreak">Long Break</button>
                     </div>
 
                     <section class="timer-card" data-testid="timer-card" aria-label="現在のタイマー表示">
                         <p class="timer-kicker">Current Session</p>
-                        <p class="mode-label">Focus Session</p>
-                        <p class="time-display">25:00</p>
-                        <p class="timer-caption">Stay with one task until the bell rings.</p>
+                        <p class="mode-label" data-testid="mode-label">Focus Session</p>
+                        <p class="time-display" data-testid="time-display">25:00</p>
+                        <p class="timer-caption" data-testid="timer-caption">Stay with one task until the bell rings.</p>
 
                         <div class="button-row" data-testid="control-group">
-                            <button class="primary-action" type="button">Start</button>
-                            <button type="button">Pause</button>
-                            <button type="button">Reset</button>
+                            <button class="primary-action" type="button" data-action="start">Start</button>
+                            <button type="button" data-action="pause">Pause</button>
+                            <button type="button" data-action="reset">Reset</button>
                         </div>
                     </section>
 
                     <section class="progress-strip" data-testid="progress-strip" aria-label="セッション進捗">
                         <article class="progress-card">
                             <span class="progress-label">Today</span>
-                            <strong>3 sessions</strong>
+                            <strong data-testid="today-sessions">0 sessions</strong>
                         </article>
                         <article class="progress-card">
                             <span class="progress-label">Next long break</span>
-                            <strong>1 more focus</strong>
+                            <strong data-testid="next-long-break">3 more focus</strong>
                         </article>
                         <article class="progress-card">
                             <span class="progress-label">Focus ratio</span>
@@ -61,7 +61,7 @@
                     <section class="info-card" data-testid="summary-card">
                         <p class="panel-title">Session Summary</p>
                         <ul class="summary-list">
-                            <li><span>Current cycle</span><strong>Focus 3</strong></li>
+                            <li><span>Current cycle</span><strong data-testid="current-cycle">Focus 1</strong></li>
                             <li><span>Auto start break</span><strong>Off</strong></li>
                             <li><span>Auto start focus</span><strong>Off</strong></li>
                         </ul>
@@ -108,6 +108,6 @@
         </section>
     </main>
 
-    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
 </html>
