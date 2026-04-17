@@ -1,3 +1,3 @@
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("Pomodoro stage 1 foundation is ready.");
+    console.log("Pomodoro stage 2 static UI is ready.");
 });
