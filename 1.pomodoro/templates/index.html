@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Timer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <main class="app-shell">
+        <section class="hero-card" aria-labelledby="app-title">
+            <p class="eyebrow">Stage 1 Foundation</p>
+            <h1 id="app-title">Pomodoro Timer</h1>
+            <p class="description">
+                Flask, HTML, CSS, JavaScript の土台を構築した初期画面です。
+                次の段階でタイマー UI と操作を実装します。
+            </p>
+
+            <section class="timer-card" aria-label="タイマーのプレースホルダー">
+                <p class="mode-label">Focus Session</p>
+                <p class="time-display">25:00</p>
+                <div class="button-row">
+                    <button type="button" disabled>Start</button>
+                    <button type="button" disabled>Pause</button>
+                    <button type="button" disabled>Reset</button>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
